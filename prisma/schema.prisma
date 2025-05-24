@@ -14,6 +14,12 @@ datasource db {
   url      = env("DB_URI")
 }
 
+enum RoleEnum {
+  USER
+  ADMIN
+  SUPER
+}
+
 model User {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
@@ -26,7 +32,7 @@ model User {
   password String
   code     String?
 
-  role String @default("user")
+  role RoleEnum @default(USER)
 
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
