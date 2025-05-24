@@ -15,4 +15,6 @@ export interface IUserRepository
   generateCode(): Promise<string>;
   getByDocument(document: string): Promise<User | null>;
   getByEmail(email: string): Promise<User | null>;
+  verifyEmailInUse(email: string): Promise<boolean>;
+  verifyDocumentInUse(document: string): Promise<boolean>;
 }

@@ -3,6 +3,7 @@ import { Entity } from '../../../@shared/domain/abstract/entity';
 import { compare, compareSync, genSaltSync, hashSync } from 'bcryptjs';
 import { Instance } from '../../../instance/domain/entities/instance.entity';
 import { RoleEnum } from '../../../../generated/prisma';
+import { DocumentVO, DocumentType } from '../vo/document.vo';
 
 type EntityProps = {
   id?: string;
@@ -10,9 +11,9 @@ type EntityProps = {
   lastName: string;
   email: string;
   document: string;
-  documentType: string;
+  documentType: DocumentType;
   password: string;
-  role: RoleEnum;
+  role?: RoleEnum;
   code?: string | null;
   instances?: Instance[];
   createdAt?: Date;
@@ -24,7 +25,7 @@ export class User extends Entity {
   lastName: string;
   email: string;
   document: string;
-  documentType: string;
+  documentType: DocumentType;
   password: string;
   role: RoleEnum;
   code?: string | null;
@@ -36,10 +37,10 @@ export class User extends Entity {
     this.firstName = props.firstName;
     this.lastName = props.lastName;
     this.email = props.email;
-    this.document = props.document;
+    this.document = DocumentVO.create(props.document, props.documentType).value;
     this.documentType = props.documentType;
     this.password = this.setPassword(props.password);
-    this.role = props.role;
+    this.role = props.role ?? RoleEnum.USER;
     this.code = props.code;
     this.instances = props.instances;
   }

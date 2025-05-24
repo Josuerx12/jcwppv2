@@ -10,6 +10,33 @@ import { User } from '../../domain/entities/user.entity';
 
 export class UserRepository implements IUserRepository {
   constructor(private readonly db: PrismaService) {}
+  async verifyEmailInUse(email: string): Promise<boolean> {
+    const model = await this.db.user.findUnique({
+      where: {
+        email,
+      },
+      select: {
+        id: true,
+        email: true,
+      },
+    });
+
+    return !!model;
+  }
+
+  async verifyDocumentInUse(document: string): Promise<boolean> {
+    const model = await this.db.user.findUnique({
+      where: {
+        document,
+      },
+      select: {
+        id: true,
+        document: true,
+      },
+    });
+
+    return !!model;
+  }
 
   async generateCode(): Promise<string> {
     while (true) {

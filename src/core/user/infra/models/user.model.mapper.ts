@@ -18,7 +18,7 @@ export class UserModelMapper {
     return new User({
       id: model.id,
       document: model.document,
-      documentType: model.documentType,
+      documentType: model.documentType as any,
       email: model.email,
       firstName: model.firstName,
       lastName: model.lastName,
