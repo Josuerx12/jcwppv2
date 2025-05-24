@@ -1,6 +1,7 @@
 export abstract class OutputParams<EntityT> {
-  perPage: string;
-  page: string;
-  totalItems: string;
+  perPage: number;
+  page: number;
+  totalItems: number;
+  totalPages: number;
   data: EntityT[];
 }

@@ -5,12 +5,12 @@ export type InputParamsConstructorProps<FilterT = string> = {
 };
 
 export class InputParams<FilterT = string> {
-  page?: number;
-  perPage?: number;
+  page: number;
+  perPage: number;
   filter?: FilterT | null;
 
   constructor(props: InputParamsConstructorProps) {
-    this.page = Number(props.page);
-    this.perPage = Number(props.perPage);
+    this.page = props.page ? parseInt(props.page) : 1;
+    this.perPage = props.perPage ? parseInt(props.perPage) : 15;
   }
 }
